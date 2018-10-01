@@ -1,0 +1,162 @@
+#### Questions
+
+> Run the commands `sort`, `wc` and `uniq` on the `commands.js` file. Explain how they work and what the output was.
+
+A:
+
+`sort commands.js` - - sorts each line of code in the file alphabetically.
+
+Output:
+
+```
+Claires-MacBook-Pro:basic-node-operations claireouellette$ sort commands.js
+
+
+
+
+
+
+        
+            //we will add the functionality of echo next within the object commandLibrary    
+            break;
+            break;
+            commandLibrary.cat(userInputArray.slice(1));
+            commandLibrary.echo(userInputArray.slice(1).join(" "));
+            done(data);
+            if (err) throw err;
+        case "cat":
+        case "echo":
+        const fileName = fullPath[0];
+        done(userInput);
+        fs.readFile(fileName, (err, data) => {
+        });
+    "cat": function(fullPath) {
+    "echo": function(userInput) {
+    //parses the user input to understand which command was typed
+    //the cat command
+    const command = userInputArray[0];
+    const userInputArray = userInput.split(" ");
+    process.stdout.write('\nprompt > ');
+    process.stdout.write(output);
+    switch (command) {
+    }
+    }
+    },
+//where we will store our commands
+//where we will store the logic of our commands
+//write out data
+const commandLibrary = {
+const fs = require("fs");
+function done(output) {
+function evaluateCmd(userInput) {
+module.exports.commandLibrary = commandLibrary;
+module.exports.evaluateCmd = evaluateCmd;
+}
+}
+};
+```
+
+`wc commands.js` - - prints the newline count, word count, and byte count of a file.
+
+Output:
+
+```
+Claires-MacBook-Pro:basic-node-operations claireouellette$ wc commands.js
+      43     116    1155 commands.js
+```
+
+`uniq commands.js` - - prints each line in a file as long as those lines are different; if it comes across a line that is the same as a line above it, it will remove that line from the output.
+
+Output:
+
+```
+Claires-MacBook-Pro:basic-node-operations claireouellette$ uniq commands.js
+const fs = require("fs");
+
+//write out data
+function done(output) {
+    process.stdout.write(output);
+    process.stdout.write('\nprompt > ');
+}
+
+//where we will store our commands
+function evaluateCmd(userInput) {
+    //parses the user input to understand which command was typed
+    const userInputArray = userInput.split(" ");
+    const command = userInputArray[0];
+
+    switch (command) {
+        case "echo":
+            //we will add the functionality of echo next within the object commandLibrary    
+            commandLibrary.echo(userInputArray.slice(1).join(" "));
+            break;
+        
+        case "cat":
+            commandLibrary.cat(userInputArray.slice(1));
+            break;
+    }
+}
+
+//where we will store the logic of our commands
+const commandLibrary = {
+    "echo": function(userInput) {
+        done(userInput);
+    },
+
+    //the cat command
+    "cat": function(fullPath) {
+        const fileName = fullPath[0];
+        fs.readFile(fileName, (err, data) => {
+            if (err) throw err;
+            done(data);
+        });
+    }
+};
+
+module.exports.commandLibrary = commandLibrary;
+module.exports.evaluateCmd = evaluateCmd;
+```
+
+> Using the pipe (`|`) connect at least two commands and run it on `commands.js`. Explain what the output was and why the specific data was outputted.
+
+A: `uniq commands.js | wc` - - `uniq` first removes any duplicate lines; this new output is then input for `wc` which then prints the new number of lines, word count, and byte count.
+
+Output:
+
+```
+Claires-MacBook-Pro:basic-node-operations claireouellette$ uniq commands.js | wc
+      44     116    1156
+```
+
+#### Programming Questions
+
+> In this checkpoint, you encountered built-in JavaScript methods as well as the new ES6 syntax. Review the information below before attempting the programming challenge.
+
+A:
+
+```javascript
+function reverseString(inputString) {
+    var reversedWords = [];
+    var reversedString = '';
+    var splitArray = inputString.split(' ');
+    splitArray.forEach(word => {
+        reversedWords.push(reverseWords(word));
+    });
+    reversedString = reversedWords.join(' ');
+    return reversedString;
+}
+
+function reverseWords(word) {
+    var letters = [];
+    var reverseWord = '';
+    for (let i = 0; i < word.length; i++) {
+        letters.push(word[i]);
+    }
+    for (let i = 0; i < word.length; i++) {
+        reverseWord += letters.pop();
+    }
+    return reverseWord;
+}
+
+reverseString('I am learning to program algorithms!');
+```

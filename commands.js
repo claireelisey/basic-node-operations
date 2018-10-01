@@ -21,6 +21,17 @@ function evaluateCmd(userInput) {
         case "cat":
             commandLibrary.cat(userInputArray.slice(1));
             break;
+
+        case "head":
+            commandLibrary.head(userInputArray.slice(1));
+            break;
+
+        case "tail":
+            commandLibrary.tail(userInputArray.slice(1));
+            break;
+
+        default: 
+            commandLibrary.errorHandler(userInputArray[0]);
     }
 }
 
@@ -37,6 +48,33 @@ const commandLibrary = {
             if (err) throw err;
             done(data);
         });
+    },
+
+    // the head command
+    "head": function(path) {
+        const fileName = path[0];
+        fs.readFile(fileName, 'utf8', (err, data) => {
+            if (err) throw err;
+            let dataArray = data.split('\n');
+            const firstTen = dataArray.splice(0,10).join('\n');
+            done(firstTen);
+        });
+    },
+
+    // the tail command
+    "tail": function(path) {
+        const fileName = path[0];
+        fs.readFile(fileName, 'utf8', (err, data) => {
+            if (err) throw err;
+            let dataArray = data.split('\n')
+            const lastTen = dataArray.splice(-10, 10).join('\n');
+            done(lastTen);
+        });
+    },
+
+    // default
+    errorHandler: function(userInput) {
+        done('Error! ' + userInput + ' is not a command');
     }
 };
 
